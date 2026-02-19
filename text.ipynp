@@ -1,0 +1,32 @@
+import os
+from transformers import OlamaForConditionalGeneration, OlamaTokenizer
+
+# Initialize the model and tokenizer
+model_name = "google/ollama-base-4096"
+model = OlamaForConditionalGeneration.from_pretrained(model_name)
+tokenizer = OlamaTokenizer.from_pretrained(model_name)
+
+def generate_response(prompt):
+    # Preprocess the input prompt
+    inputs = tokenizer.encode_plus(
+        prompt,
+        max_length=512,
+        padding="max_length",
+        truncation=True,
+        return_attention_mask=True,
+        return_tensors="pt",
+    )
+
+    # Generate a response using the model
+    outputs = model.generate(**inputs)
+
+    # Convert the generated response to a string
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    return response
+
+# Test the function with a prompt
+prompt = "Hello, how are you?"
+response = generate_response(prompt)
+print(response)
+```
