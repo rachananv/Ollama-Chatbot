@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=https://YOUR_NGROK_URL.ngrok.io/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting to Ollama Chatbot</title>
+  </head>
+  <body>
+    <p>If you are not redirected automatically, <a href="https://YOUR_NGROK_URL.ngrok.io/">click here</a> to open the chatbot.</p>
+    <p>To use this redirect:
+      <ol>
+        <li>Run your chatbot locally: <code>ollama serve</code> and <code>python web_chatbot.py</code></li>
+        <li>Expose it with ngrok: <code>ngrok http 5000</code></li>
+        <li>Replace <strong>https://YOUR_NGROK_URL.ngrok.io/</strong> in this file with the ngrok "Forwarding" URL and push to GitHub.</li>
+      </ol>
+    </p>
+  </body>
+</html>
