@@ -200,7 +200,29 @@
     <script>
         const CHATBOT_URL = 'http://localhost:5000/';
 
-        // Check if server is running
+        // Auto-redirect to chatbot on page load
+        window.addEventListener('load', function() {
+            checkServerAndRedirect();
+        });
+
+        // Check if server is running and redirect if available
+        async function checkServerAndRedirect() {
+            try {
+                const response = await fetch(CHATBOT_URL, {
+                    method: 'HEAD',
+                    mode: 'no-cors',
+                    timeout: 3000
+                });
+                // Server is running, redirect to it
+                window.location.href = CHATBOT_URL;
+            } catch (e) {
+                // Server not running, show launcher page
+                updateStatus(false);
+                checkServerStatus();
+            }
+        }
+
+        // Check if server is running (for status display)
         async function checkServerStatus() {
             try {
                 const response = await fetch(CHATBOT_URL, {
@@ -225,11 +247,10 @@
         }
 
         function openChatbot() {
-            window.open(CHATBOT_URL, 'chatbot');
+            window.location.href = CHATBOT_URL;
         }
 
-        // Check status on load and every 5 seconds
-        checkServerStatus();
+        // Check status every 5 seconds
         setInterval(checkServerStatus, 5000);
     </script>
 </body>
